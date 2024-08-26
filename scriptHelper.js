@@ -18,21 +18,33 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function validateInput(testInput) {
-     // validateInput() should take in a string as a parameter and return "Empty", "Not a Number", or "Is a Number" as appropriate.
+     let userInput = testInput.toLowerCase();
      
-     if (testInput === '') {
-         return window.alert("Empty");
-     } else if (isNaN(testInput)) {
-         return window.alert("Not a Number");
-     } else if (!isNaN(testInput)) {
-         return window.alert("Is a Number");
-     };
+     if (userInput === '') {
+         return "Empty";
+     } else if (isNaN(userInput)) {
+         return "Not a Number";
+     } else {
+         return "Is a Number"
+     }
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-     // Using the values in those strings and the document parameter for your HTML document, update the shuttle requirements as described below. 
-    //  Make sure to call your formSubmission() function at the appropriate time in your script.js file!
-    //  need to access these items from validateInput
+    // declare variables using validateInput function return string
+     const pilotStatus = validateInput(pilot);
+     const copilotStatus = validateInput(copilot);
+     const fuelLevelStatus = validateInput(fuelLevel);
+     const cargoLevelStatus = validateInput(cargoLevel);
+     
+     //  HERE: 1): check if things are valid on the basis of being empty,
+     //  2): then, if they are the proper type
+     //  3): then, update the faulty items section
+    //  4): and, launch status h2 section
+     if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelLevelStatus === "Empty" || cargoLevelStatus === "Empty") {
+           alert("All fields are required!");
+     }
+     
+     
  }
  
  async function myFetch() {
