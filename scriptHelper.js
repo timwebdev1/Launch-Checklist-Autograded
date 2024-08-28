@@ -42,8 +42,6 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   const fuelLevelValidation = validateInput(fuelLevel);
   const cargoLevelValidation = validateInput(cargoLevel);
 
-
-
   //  HERE: 1): check if things are valid on the basis of being empty,
   //  2): then, if they are the proper type
   if (
@@ -62,20 +60,29 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   ) {
     alert("Make sure to enter valid information for each field.");
     return false;
+
+    //  3): then, update the faulty items section
+
+    //  4): and, launch status h2 section
   } else {
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
     if (fuelLevel < 10000) {
       list.style.visibility = "visible";
-      fuelStatus.innerHTML = `Fuel level too low for launch`;
-      
-    };
+      fuelStatus.innerHTML = "Fuel level too low for launch";
+      launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+      launchStatus.style.color = "red";
+    } else if (cargoLevel > 10000) {
+      list.style.visibility = "visible";
+      cargoStatus.innerHTML = "Cargo mass too heavy for launch";
+      launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+      launchStatus.style.color = "red";
+    } else {
+      launchStatus.innerHTML = "Shuttle is Ready for Launch";
+      launchStatus.style.color = "green";
+    }
     return false;
   }
-
-  //  3): then, update the faulty items section
-
-  //  4): and, launch status h2 section
 }
 async function myFetch() {
   let planetsReturned;

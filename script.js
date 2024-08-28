@@ -17,7 +17,6 @@ window.addEventListener("load", function () {
   form.addEventListener("submit", function (event) {
     // faulty item params
     let list = document.getElementById("faultyItems");
-    let h2 = document.getElementById("h2");
     let launchStatus = document.getElementById("launchStatus");
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
