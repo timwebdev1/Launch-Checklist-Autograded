@@ -34,20 +34,17 @@ function validateInput(testInput) {
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-  // declare variables using validateInput function return string
   const pilotValidation = validateInput(pilot);
   const copilotValidation = validateInput(copilot);
   const fuelLevelValidation = validateInput(fuelLevel);
   const cargoLevelValidation = validateInput(cargoLevel);
 
-      launchStatus = document.getElementById("launchStatus");
-      pilotStatus = document.getElementById("pilotStatus");
-      copilotStatus = document.getElementById("copilotStatus");
-      fuelStatus = document.getElementById("fuelStatus");
-      cargoStatus = document.getElementById("cargoStatus");
-  
-  //  HERE: 1): check if things are valid on the basis of being empty,
-  //  2): then, if they are the proper type
+  launchStatus = document.getElementById("launchStatus");
+  pilotStatus = document.getElementById("pilotStatus");
+  copilotStatus = document.getElementById("copilotStatus");
+  fuelStatus = document.getElementById("fuelStatus");
+  cargoStatus = document.getElementById("cargoStatus");
+
   if (
     pilotValidation === "Empty" ||
     copilotValidation === "Empty" ||
@@ -64,11 +61,16 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
   ) {
     alert("Make sure to enter valid information for each field.");
     return false;
-
   } else {
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
-    if (fuelLevel < 10000) {
+    if (fuelLevel < 10000 && cargoLevel > 10000) {
+      list.style.visibility = "visible";
+      fuelStatus.innerHTML = "Fuel level too low for launch";
+      cargoStatus.innerHTML = `Cargo mass too heavy for launch`;
+      launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+      launchStatus.style.color = "red";
+    } else if (fuelLevel < 10000) {
       list.style.visibility = "visible";
       fuelStatus.innerHTML = "Fuel level too low for launch";
       launchStatus.innerHTML = "Shuttle Not Ready for Launch";
