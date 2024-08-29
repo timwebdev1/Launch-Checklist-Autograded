@@ -2,14 +2,16 @@
 
 window.addEventListener("load", function () {
   let listedPlanets;
-  // // Set listedPlanetsResponse equal to the value returned by calling myFetch()
   let listedPlanetsResponse = myFetch();
   listedPlanetsResponse.then(function (result) {
       listedPlanets = result;
       console.log(listedPlanets);
   }).then(function () {
-      console.log(listedPlanets);
-  //     // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+    console.log(listedPlanets);
+    //     // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+    let selectsPlanet = pickPlanet(listedPlanets);
+    console.log(selectsPlanet);
+    addDestinationInfo(document, selectsPlanet.name, selectsPlanet.diameter, selectsPlanet.star, selectsPlanet.distance, selectsPlanet.moons, selectsPlanet.image);
   })
 
   let form = document.querySelector("form");
@@ -17,21 +19,18 @@ window.addEventListener("load", function () {
   form.addEventListener("submit", function (event) {
     // faulty item params
     let list = document.getElementById("faultyItems");
-    let launchStatus = document.getElementById("launchStatus")
-    let pilotStatus = document.getElementById("pilotStatus");
-    let copilotStatus = document.getElementById("copilotStatus");
-    let fuelStatus = document.getElementById("fuelStatus");
-    let cargoStatus = document.getElementById("cargoStatus");
+
 
     // form item params
-    let pilotName = document.querySelector("input[name=pilotName]").value;
-    let copilotName = document.querySelector("input[name=copilotName]").value;
+    let pilot = document.querySelector("input[name=pilotName]").value;
+    let copilot = document.querySelector("input[name=copilotName]").value;
     let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
     let cargoLevel = document.querySelector("input[name=cargoMass]").value;
 
-    // console.log(pilotName, copilotName, fuelLevel, cargoLevel);
+    // console.log(pilotStatus);
    
-      let isValid = formSubmission(form, list, pilotName, copilotName, fuelLevel, cargoLevel);
+    let isValid = formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
+    
     if (!isValid) {
       event.preventDefault();
     };
